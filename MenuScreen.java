@@ -10,16 +10,20 @@ public class MenuScreen extends World {
 
     public MenuScreen() {
         super(600, 400, 1);
+        
+        avatarQueue = new Queue<>();
+        screenQueue = new Queue<>(); 
 
         addObject(new Button(this::cycleScreens), 300, 350);
         
-        avatarQueue = new Queue<>();
         loadAvatars();
-        loadScreen();
+        loadScreen(); 
         currentAvatar = avatarQueue.peek();
-        currentScreen =screenQueue.peek();
+        currentScreen = screenQueue.peek();
+        
         avatarLabel = new Label(currentAvatar, 100, 100);
         screenLabel = new Label(currentScreen, 100, 100);
+        
         addObject(avatarLabel, 300, 200);
         addObject(screenLabel, 300, 200);
         
@@ -32,22 +36,23 @@ public class MenuScreen extends World {
         avatarQueue.enqueue(new GreenfootImage("images/face_c.png"));
     }
 
-    public void cycleAvatar() {
-        GreenfootImage firstAvatar = avatarQueue.dequeue();
-        avatarQueue.enqueue(firstAvatar);
-        currentAvatar = avatarQueue.peek();
-        avatarLabel.setImage(currentAvatar); 
-    }
     private void loadScreen() {
         screenQueue.enqueue(new Label(1, 100));
         screenQueue.enqueue(new Label(2, 100));
         screenQueue.enqueue(new Label(3, 100));
     }
 
+    public void cycleAvatar() {
+        GreenfootImage firstAvatar = avatarQueue.dequeue();
+        avatarQueue.enqueue(firstAvatar);
+        currentAvatar = avatarQueue.peek();
+        avatarLabel.setImage(currentAvatar); 
+    }
+
     public void cycleScreens() {
-        Label firstScreen= screenQueue.dequeue();
+        Label firstScreen = screenQueue.dequeue();
         screenQueue.enqueue(firstScreen);
         currentScreen = screenQueue.peek();
-        screenLabel=currentScreen; 
+        screenLabel = currentScreen; 
     }
 }
