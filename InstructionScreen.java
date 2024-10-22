@@ -5,7 +5,7 @@ public class InstructionScreen extends World
     private MenuScreen menuScreen;  
     private String[] instructions = {
         "Welcome to the game!",
-        "Use arrow keys to move.",
+        "Use the buttons to navigate.",
     };
     private int currentIndex = 0;
     private Label instructionLabel;
