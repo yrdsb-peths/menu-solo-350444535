@@ -1,15 +1,35 @@
 import greenfoot.*;
 
-public class InstructionScreen extends World {
+public class InstructionScreen extends World 
+{
     private MenuScreen menuScreen;  
-
-    public InstructionScreen(MenuScreen menuScreen) {
+    private String[] instructions = {
+        "Welcome to the game!",
+        "Use arrow keys to move.",
+    };
+    private int currentIndex = 0;
+    private Label instructionLabel;
+    public InstructionScreen(MenuScreen menuScreen) 
+    {
         super(600, 400, 1);
-        this.menuScreen = menuScreen;  
+        this.menuScreen = menuScreen;
+        instructionLabel = new Label(instructions[currentIndex], 24);
+        addObject(instructionLabel, 300, 200); 
+        addObject(new Button(this::cycleInstruction), 300, 300);
         addObject(new Button(this::goBack), 300, 350);
     }
+    public void cycleInstruction() {
+        currentIndex++;
+        if (currentIndex >= instructions.length) {
+            currentIndex = 0;
+        }
+        removeObject(instructionLabel);
+        instructionLabel = new Label(instructions[currentIndex], 24);
+        addObject(instructionLabel, 300, 200);
+    }
 
-    public void goBack() {
+    public void goBack() 
+    {
         Greenfoot.setWorld(menuScreen);  
     }
 }
